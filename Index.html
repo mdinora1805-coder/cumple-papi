@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para mi Papi ❤️</title>
+
+    <!-- Confeti -->
+   <!-- Confeti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+
+        /* =========================================================
+           CONFIGURACIÓN GENERAL
+        ========================================================= */
+
+        :root {
+            --gold: #f5b942;
+            --gold-light: #ffd978;
+            --blue: #38bdf8;
+            --blue-dark: #0284c7;
+            --white: #ffffff;
+            --text: #f5f5f5;
+            --muted: #aab2bd;
+            --dark: #070b12;
+            --card: rgba(15, 20, 29, 0.94);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    #26354d 0%,
+                    #0d1117 45%,
+                    #05070b 100%
+                );
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 15px;
+        }
+
+        /* =========================================================
+           PARTÍCULAS DEL FONDO
+        ========================================================= */
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,.6);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+
+            from {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: .8;
+            }
+
+            90% {
+                opacity: .5;
+            }
+
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+
+        /* =========================================================
+           CONTENEDOR
+        ========================================================= */
+
+        .container {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+            max-width: 470px;
+
+            min-height: 680px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(25,32,43,.97),
+                    rgba(8,12,18,.98)
+                );
+
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 30px;
+
+            padding: 25px 20px;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.65),
+                0 0 45px rgba(56,189,248,.08);
+
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 250px;
+            height: 250px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(245,185,66,.16),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+        /* =========================================================
+           PASOS
+        ========================================================= */
+
+        .step {
+            display: none;
+            opacity: 0;
+            transform: translateY(25px) scale(.98);
+        }
+
+        .step.active {
+            display: block;
+
+            animation:
+                pageEnter .8s ease forwards;
+        }
+
+        @keyframes pageEnter {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* =========================================================
+           INTRO
+        ========================================================= */
+
+        .intro {
+            min-height: 620px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+        .small-label {
+            color: var(--gold-light);
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+
+            animation: fadeDown 1s ease;
+        }
+
+        @keyframes fadeDown {
+
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .intro h1 {
+            font-size: 2.1rem;
+            color: var(--gold);
+            font-weight: 900;
+
+            margin-bottom: 8px;
+
+            text-shadow:
+                0 0 25px rgba(245,185,66,.25);
+        }
+
+        .intro-subtitle {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        /* =========================================================
+           RAMO HOT WHEELS
+        ========================================================= */
+
+        .ramo-container {
+            width: 100%;
+            max-width: 390px;
+
+            margin: 15px auto 22px;
+
+            padding: 8px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(56,189,248,.9),
+                    rgba(245,185,66,.9)
+                );
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,.5),
+                0 0 30px rgba(56,189,248,.12);
+
+            animation:
+                ramoEntrada 1.2s cubic-bezier(.17,.67,.31,1.3);
+        }
+
+        @keyframes ramoEntrada {
+
+            from {
+                opacity: 0;
+                transform: scale(.65) rotate(-4deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        .ramo-inner {
+            background: #05070b;
+            border-radius: 19px;
+            overflow: hidden;
+        }
+
+        .ramo-container img {
+            width: 100%;
+            max-height: 340px;
+
+            object-fit: contain;
+            display: block;
+
+            transition: transform .5s ease;
+        }
+
+        .ramo-container:hover img {
+            transform: scale(1.04);
+        }
+
+        .ramo-caption {
+            margin-top: 8px;
+
+            color: var(--gold-light);
+            font-size: .85rem;
+            font-weight: 700;
+
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseText {
+
+            0%,100% {
+                opacity: .7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* =========================================================
+           BOTONES
+        ========================================================= */
+
+        .btn-nav {
+            width: 100%;
+
+            border: none;
+            border-radius: 16px;
+
+            padding: 16px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gold),
+                    #d97706
+                );
+
+            color: #111;
+
+            font-size: 1rem;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 25px rgba(245,158,11,.25);
+
+            transition:
+                transform .2s,
+                box-shadow .2s;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 12px 30px rgba(245,158,11,.4);
+        }
+
+        .btn-nav:active {
+            transform: scale(.96);
+        }
+
+        /* =========================================================
+           TITULOS
+        ========================================================= */
+
+        .section-title {
+            text-align: center;
+
+            color: var(--gold);
+
+            font-size: 2rem;
+            font-weight: 900;
+
+            margin-bottom: 18px;
+
+            text-shadow:
+                0 0 20px rgba(245,185,66,.2);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--muted);
+            margin-top: -10px;
+            margin-bottom: 18px;
+        }
+
+        /* =========================================================
+           FOTOS
+        ========================================================= */
+
+        .photo-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin: 10px 0 22px;
+        }
+
+        .photo-card {
+            height: 205px;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(255,255,255,.15);
+
+            background: #05070b;
+
+            position: relative;
+
+            box-shadow:
+                0 8px 20px rgba(0,0,0,.35);
+
+            animation:
+                photoAppear .8s ease both;
+        }
+
+        .photo-card:nth-child(1) {
+            animation-delay: .15s;
+        }
+
+        .photo-card:nth-child(2) {
+            animation-delay: .3s;
+        }
+
+        .photo-card:nth-child(3) {
+            animation-delay: .45s;
+        }
+
+        .photo-card:nth-child(4) {
+            animation-delay: .6s;
+        }
+
+        @keyframes photoAppear {
+
+            from {
+                opacity: 0;
+                transform: scale(.85) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .photo-card::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,.25),
+                    transparent 50%
+                );
+
+            pointer-events: none;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            background: #090d14;
+
+            transition: transform .5s ease;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.04);
+        }
+
+        /* =========================================================
+           CARTA
+        ========================================================= */
+
+        .letter-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(17,24,34,.95),
+                    rgba(7,11,17,.95)
+                );
+
+            border-left: 4px solid var(--gold);
+
+            border-radius: 18px;
+
+            padding: 22px 20px;
+
+            text-align: left;
+
+            line-height: 1.8;
+
+            font-size: .96rem;
+
+            color: #e2e8f0;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.25);
+        }
+
+        .letter-card p {
+            margin-bottom: 16px;
+        }
+
+        .letter-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .letter-card strong {
+            color: var(--gold-light);
+        }
+
+        .highlight-gold {
+            color: var(--gold-light);
+            font-weight: 800;
+        }
+
+        .highlight-cyan {
+            color: var(--blue);
+            font-weight: 900;
+
+            text-shadow:
+                0 0 15px rgba(56,189,248,.3);
+        }
+
+        /* =========================================================
+           FRASE ESPECIAL
+        ========================================================= */
+
+        .emotional {
+            margin: 22px 0;
+
+            padding: 30px 18px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(56,189,248,.12),
+                    rgba(0,0,0,.15)
+                );
+
+            border: 1px solid rgba(56,189,248,.15);
+
+            animation: emotionalPulse 3s infinite;
+        }
+
+        @keyframes emotionalPulse {
+
+            0%,100% {
+                box-shadow: 0 0 0 rgba(56,189,248,0);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 30px rgba(56,189,248,.1);
+            }
+        }
+
+        .emotional-small {
+            color: var(--muted);
+            font-size: .85rem;
+            margin-bottom: 8px;
+        }
+
+        .emotional-main {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        .emotional-main span {
+            color: var(--gold);
+        }
+
+        /* =========================================================
+           TRANSICIÓN
+        ========================================================= */
+
+        .transition-message {
+            text-align: center;
+
+            padding: 45px 15px;
+        }
+
+        .transition-message p {
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .transition-message h2 {
+            color: var(--gold);
+            font-size: 2rem;
+        }
+
+        /* =========================================================
+           CUENTA REGRESIVA
+        ========================================================= */
+
+        .countdown {
+
+            min-height: 550px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+        .countdown-label {
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: .8rem;
+            margin-bottom: 20px;
+        }
+
+        .count-number {
+
+            font-size: 7rem;
+
+            font-weight: 900;
+
+            color: var(--gold);
+
+            text-shadow:
+                0 0 40px rgba(245,185,66,.35);
+
+            animation:
+                numberPop .9s ease;
+        }
+
+        @keyframes numberPop {
+
+            0% {
+                transform: scale(2);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(.9);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* =========================================================
+           FELIZ CUMPLEAÑOS
+        ========================================================= */
+
+        .birthday {
+
+            text-align: center;
+
+            padding: 25px 5px;
+        }
+
+        .birthday h2 {
+
+            color: var(--gold);
+
+            font-size: 2.25rem;
+
+            line-height: 1.15;
+
+            margin-bottom: 22px;
+
+            text-shadow:
+                0 0 25px rgba(245,185,66,.3);
+
+            animation:
+                birthdayGlow 2s infinite;
+        }
+
+        @keyframes birthdayGlow {
+
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+        }
+
+        .birthday p {
+
+            color: #dbe4ee;
+
+            line-height: 1.7;
+
+            margin-bottom: 12px;
+        }
+
+        .best-dad {
+
+            color: var(--gold-light) !important;
+
+            font-weight: 900;
+
+            font-size: 1.2rem;
+
+            margin-top: 20px;
+        }
+
+        /* =========================================================
+           HOT WHEELS FINAL
+        ========================================================= */
+
+        .hotwheels-final {
+
+            margin: 25px 0;
+
+            padding: 22px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            border: 1px solid rgba(56,189,248,.2);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(56,189,248,.08),
+                    rgba(245,185,66,.05)
+                );
+        }
+
+        .cars {
+
+            font-size: 2rem;
+
+            letter-spacing: 7px;
+
+            margin-bottom: 12px;
+
+            animation:
+                carsMove 2s ease-in-out infinite;
+        }
+
+        @keyframes carsMove {
+
+            0%,100% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+        }
+
+        .hotwheels-final p {
+
+            color: #dce5ef;
+
+            line-height: 1.6;
+        }
+
+        .hotwheels-final strong {
+
+            color: var(--gold);
+        }
+
+        /* =========================================================
+           FIRMA
+        ========================================================= */
+
+        .signature {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid rgba(255,255,255,.1);
+
+            color: var(--muted);
+
+            line-height: 1.8;
+        }
+
+        .signature strong {
+
+            color: var(--gold-light);
+
+            font-size: 1.05rem;
+        }
+
+        .heart {
+
+            display: inline-block;
+
+            animation:
+                heartBeat 1.5s infinite;
+        }
+
+        @keyframes heartBeat {
+
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #697586;
+
+            font-size: .75rem;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media(max-width: 400px) {
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .intro h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .birthday h2 {
+                font-size: 1.9rem;
+            }
+
+            .count-number {
+                font-size: 5rem;
+            }
+
+            .photo-card {
+                height: 180px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         PARTÍCULAS
+    ========================================================= -->
+
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+
+        <!-- =====================================================
+             PARTE 1 — INTRO + RAMO
+        ===================================================== -->
+
+        <div class="step active" id="step1">
+
+            <div class="intro">
+
+                <div class="small-label">
+                    🛠️ Una sorpresa preparada especialmente para ti
+                </div>
+
+                <h1>
+                    ¡Feliz Cumpleaños, Papi! ❤️
+                </h1>
+
+                <p class="intro-subtitle">
+                    Este año tu regalo viene con un poquito de gasolina... 🏎️
+                </p>
+
+                <div class="ramo-container">
+
+                    <div class="ramo-inner">
+
+                        <!-- IMAGEN LOCAL -->
+                        <img
+                            src="imagenes/bumble.jfif"
+                            alt="Ramo de Hot Wheels"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="ramo-caption">
+                    🏎️ Un detalle especial para alguien muy especial ❤️
+                </div>
+
+                <button
+                    class="btn-nav"
+                    style="margin-top:22px;"
+                    onclick="irA(2)"
+                >
+                    🎁 Abrir mi sorpresa
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             PARTE 2 — CARTA
+        ===================================================== -->
+
+        <div class="step" id="step2">
+
+            <h1 class="section-title">
+                Para mi Padre 👑
+            </h1>
+
+            <p class="section-subtitle">
+                ❤️ Algunas palabras de tu hija...
+            </p>
+
+
+            <!-- FOTOS -->
+
+            <div class="photo-grid">
+
+                <div class="photo-card">
+                    <img
+                        src="Imagenes/foto15.jpeg"
+                        alt="Mis 15 años"
+                    >
+                </div>
+
+                <div class="photo-card">
+                    <img
+                        src="Imagenes/momentos juntos.jpeg"
+                        alt="Momentos juntos"
+                    >
+                </div>
+
+                <div class="photo-card">
+                    <img
+                        src="Imagenes/paseo.jpeg"
+                        alt="Paseo"
+                    >
+                </div>
+
+                <div class="photo-card">
+                    <img
+                        src="Imagenes/Familia.jpeg"
+                        alt="Familia"
+                    >
+                </div>
+
+            </div>
+
+
+            <!-- CARTA ORIGINAL -->
+
+            <div class="letter-card">
+
+                <p>
+                    <strong>Querido Papi:</strong>
+                </p>
+
+                <p>
+                    Hoy en tu cumpleaños quiero decirte lo enormemente
+                    orgullosa que me siento de ser tu hija. Que Dios bendiga
+                    grandemente tu vida, tu salud y cada uno de tus pasos.
+                </p>
+
+                <p>
+                    Veo día a día tu esfuerzo incansable en el taller,
+                    trabajando duro, construyendo techos y buscando siempre
+                    la manera de salir adelante
+                    sin importar lo pesado del trabajo.
+                </p>
+
+                <p>
+                    Jamás te rindes ni descansas con tal de que a nosotros
+                    nunca nos falte nada.
+                </p>
+
+            </div>
+
+
+            <!-- PAUSA EMOCIONAL -->
+
+            <div class="transition-message">
+
+                <p>
+                    Y ahora...
+                </p>
+
+                <h2>
+                    todavía falta una sorpresa. ❤️
+                </h2>
+
+            </div>
+
+
+            <button
+                class="btn-nav"
+                onclick="irA(3)"
+            >
+                🎉 Continuar
+            </button>
+
+        </div>
+
+
+        <!-- =====================================================
+             PARTE 3 — CUENTA REGRESIVA
+        ===================================================== -->
+
+        <div class="step" id="step3">
+
+            <div class="countdown">
+
+                <div class="countdown-label">
+                    Prepárate, Papi...
+                </div>
+
+                <div
+                    class="count-number"
+                    id="countNumber"
+                >
+                    3
+                </div>
+
+                <p style="color:#aab2bd;">
+                    ❤️ Porque hoy celebramos tu vida
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             PARTE 4 — CUMPLEAÑOS
+        ===================================================== -->
+
+        <div class="step" id="step4">
+
+            <div class="birthday">
+
+                <h2>
+                    🎉 ¡¡FELIZ CUMPLEAÑOS, PAPI!! 🥳
+                </h2>
+
+                <p>
+                    ¡Que Dios te conceda muchísimos años más de vida
+                    llenos de abundantes bendiciones, excelente salud
+                    y alegrías!
+                </p>
+
+                <p class="best-dad">
+                    ¡Eres el mejor papá del mundo entero! ❤️
+                </p>
+
+
+                <!-- HOT WHEELS -->
+
+                <div class="hotwheels-final">
+
+                    <div class="photo-card">
+
+                        <img
+                            src="Imagenes/Ramo hots.png"
+                            alt="Ramo de Hot Wheels"
+                        >
+
+                    </div>
+
+                    <p>
+                        Y porque sé que también tienes tu niño interior...
+                    </p>
+
+                    <p>
+                        Este detalle es especialmente para ti. ❤️
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>
+                            ¡Espero que te guste tu ramo de Hot Wheels,
+                            Papi! 🏎️🎁
+                        </strong>
+                    </p>
+
+                </div>
+
+
+                <!-- FIRMA -->
+
+                <div class="signature">
+
+                    <span class="heart">❤️</span>
+
+                    <br>
+
+                    Con todo mi amor
+
+                    <br>
+
+                    <strong>
+                        De tu hija la Ingeniera 👩🏻‍💻
+                    </strong>
+
+                    <br><br>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="btn-nav"
+                onclick="lanzarConfeti(true)"
+                style="margin-top:15px;"
+            >
+                🎊 ¡Lluvia de Confeti!
+            </button>
+
+
+            <button
+                class="btn-nav"
+                onclick="irA(1)"
+                style="
+                    margin-top:12px;
+                    background:transparent;
+                    color:#aab2bd;
+                    border:1px solid #596273;
+                    box-shadow:none;
+                "
+            >
+                🔄 Volver al inicio
+            </button>
+
+
+            <footer>
+                Hecho con muchísimo amor ❤️
+            </footer>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+        /* =========================================================
+           CREAR PARTÍCULAS
+        ========================================================= */
+
+        const particles = document.getElementById("particles");
+
+        for(let i = 0; i < 35; i++){
+
+            const particle = document.createElement("div");
+
+            particle.classList.add("particle");
+
+            particle.style.left =
+                Math.random() * 100 + "%";
+
+            particle.style.animationDuration =
+                (7 + Math.random() * 10) + "s";
+
+            particle.style.animationDelay =
+                Math.random() * 8 + "s";
+
+            particle.style.opacity =
+                Math.random();
+
+            particles.appendChild(particle);
+        }
+
+
+        /* =========================================================
+           CAMBIO DE PÁGINA
+        ========================================================= */
+
+        function irA(paso){
+
+            const pasos =
+                document.querySelectorAll(".step");
+
+            pasos.forEach(el => {
+                el.classList.remove("active");
+            });
+
+            const siguiente =
+                document.getElementById("step" + paso);
+
+            siguiente.classList.add("active");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+            /* Si vamos al countdown */
+
+            if(paso === 3){
+
+                iniciarCuentaRegresiva();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           CUENTA REGRESIVA
+        ========================================================= */
+
+        let cuentaIniciada = false;
+
+        function iniciarCuentaRegresiva(){
+
+            if(cuentaIniciada) return;
+
+            cuentaIniciada = true;
+
+            const numero =
+                document.getElementById("countNumber");
+
+            let contador = 3;
+
+            numero.textContent = contador;
+
+            const intervalo =
+                setInterval(() => {
+
+                    contador--;
+
+                    if(contador > 0){
+
+                        numero.textContent = contador;
+
+                        /* Reiniciar animación */
+
+                        numero.style.animation = "none";
+
+                        void numero.offsetWidth;
+
+                        numero.style.animation =
+                            "numberPop .9s ease";
+                    }
+
+                    else{
+
+                        clearInterval(intervalo);
+
+                        numero.textContent = "🎉";
+
+                        setTimeout(() => {
+
+                            irA(4);
+
+                            lanzarConfeti();
+
+                        }, 700);
+
+                    }
+
+                }, 1000);
+
+        }
+
+
+        /* =========================================================
+           CONFETI
+        ========================================================= */
+
+        function lanzarConfeti(grande = false){
+
+            const cantidad =
+                grande ? 260 : 160;
+
+            confetti({
+
+                particleCount: cantidad,
+
+                spread: grande ? 130 : 100,
+
+                startVelocity: 45,
+
+                gravity: 0.8,
+
+                scalar: 1.1,
+
+                origin: {
+                    y: 0.6
+                }
+
+            });
+
+
+            /* Segunda explosión */
+
+            setTimeout(() => {
+
+                confetti({
+
+                    particleCount: grande ? 160 : 90,
+
+                    spread: 90,
+
+                    origin: {
+                        x: 0,
+                        y: .7
+                    }
+
+                });
+
+                confetti({
+
+                    particleCount: grande ? 160 : 90,
+
+                    spread: 90,
+
+                    origin: {
+                        x: 1,
+                        y: .7
+                    }
+
+                });
+
+            }, 350);
+
+        }
+
+
+        /* =========================================================
+           EFECTO EXTRA AL CARGAR
+        ========================================================= */
+
+        window.addEventListener("load", () => {
+
+            setTimeout(() => {
+
+                /* pequeño confeti inicial */
+
+                confetti({
+
+                    particleCount: 35,
+
+                    spread: 55,
+
+                    origin: {
+                        y: .8
+                    }
+
+                });
+
+            }, 1200);
+
+        });
+
+    </script>
+
+</body>
+</html>
